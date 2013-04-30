@@ -79,7 +79,7 @@ Ldsdate::Application.configure do
   config.signup_complete_activate = true
 
   #David FB
-  configatron.facebook.key = '160642587431197'
-  configatron.facebook.secret = '	6b31e336c8d138c443d6eb368f3eceef'
-  configatron.facebook.callback_url = "http://ldsgig.herokuapp/auth/facebook"
+  configatron.facebook.key = '111432675726704'
+  configatron.facebook.secret = '	64812d9d17b854a9d7a8bf0f7eac769e'
+  configatron.facebook.callback_url = "http://ldsdate.herokuapp/auth/facebook"
 end
