@@ -1,0 +1,22 @@
+#surveyor
+  
+  = semantic_form_for(@response_set, :as => :r, :url => update_my_survey_path, :html => {:method => :put, :id => "survey_form", :class => @survey.custom_class}) do |f|
+  
+    = hidden_field_tag :surveyor_javascript_enabled, false
+  
+    = render 'surveyor_partials/section_menu' # unless @sections.size < 3
+    .survey_title= @survey.title
+    .previous_section= previous_section
+    = render 'surveyor_partials/dependents' unless @dependents.empty?
+    - if false #@response_set.no_responses_for_section?(@section) # cache if response_set has no responses for current section
+      = cache("section_#{@section.id}"){ render "/partials/section", :f => f }
+    - else # no cache
+      = render "/surveyor_partials/section", :f => f
+    .next_section
+      = @sections.last == @section ? submit_tag(:surveyor_click_here_to_finish.l, :name => "finish") : submit_tag(:surveyor_next_section.l, :name => "section[#{@sections[@sections.index(@section)+1].id}]")
+  %br
+
+:javascript
+  $(document).ready(function() {
+    $("input#surveyor_javascript_enabled").val(true);
+  });

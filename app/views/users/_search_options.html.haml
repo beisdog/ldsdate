@@ -1,0 +1,60 @@
+  
+-widget do
+  %ul.nav.nav-list
+    %li.nav-header= :search_setting.l
+  .form
+    = form_for @search_setting, :url => users_path, :method => "get" do |f|
+      %table
+        %tr
+          %td{:colspan => "3"}
+            %label
+              = :only_online.l
+          %td
+            = check_box :search_setting, :show_only_only
+        %tr
+          %td
+            %label
+              = :males.l
+          %td
+            = check_box :search_setting, :show_males
+          %td
+            %label
+              = :females.l
+          %td
+            = check_box :search_setting, :show_females
+        %tr
+          %td
+            %label
+              = :age.l
+          %td{:colspan => "3" }
+            = text_field :search_setting, :age_from, :style => "width: 40px"
+            = " - "
+            = text_field :search_setting, :age_to, :style => "width: 40px"
+        %tr
+          %td
+            %label
+              = :ward.l
+          %td{:colspan => "2" }
+            = text_field :search_setting, :ward, :style => "width: 100px"
+        %tr
+          %td
+            %label
+              = :stake.l
+          %td{:colspan => "2" }
+            = text_field :search_setting, :stake, :style => "width: 100px"
+        %tr
+          %td
+            %label
+              = :country.l
+          %td{:colspan => "3" }
+            = select(:search_setting, :country_ids, options_from_collection_for_select(Country.where("id in (select country_id from users)"), "id", "name", :selected => @search_setting.country_ids), {:include_blank => true},{:style => "width: 100px"})
+        %tr
+          %td
+          %td{:colspan => "3" }
+            = submit_tag :search.l, :class => 'btn btn-info'
+
+- if current_user
+  -widget do 
+    %ul.nav.nav-list
+      %li.nav-header= :share_the_love.l
+      %li= link_to :invite_your_friends_to_join.l, invite_user_path(current_user)

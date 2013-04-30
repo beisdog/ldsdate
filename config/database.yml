@@ -1,0 +1,33 @@
+# SQLite version 3.x
+#   gem install sqlite3
+#
+#   Ensure the SQLite 3 gem is defined in your Gemfile
+#   gem 'sqlite3'
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: ldsdate_development
+  pool: 5
+  username: davidbeisert
+  password: $andra
+  host: localhost
+  port: 5432
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: ldsdate_test
+  pool: 5
+  username: davidbeisert
+  password: $andra
+  port: 5432
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: ldsdate_test
+  pool: 5
+  username: davidbeisert
+  password: $andra
+  port: 5432
+

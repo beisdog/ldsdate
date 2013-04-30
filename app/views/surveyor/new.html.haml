@@ -1,0 +1,29 @@
+#surveyor
+  - unless (types = flash.keys.select{|k| [:notice, :error, :warning].include?(k)}).blank?
+    .surveyor_flash
+      = flash_messages(types)
+      .close
+  .survey_title= t('surveyor.take_these_surveys')
+  %br
+  #survey_list
+    %ul
+      - unless @codes.empty?
+        - @codes.each do |access_code, values|
+          %li
+            = form_tag take_survey_path(:survey_code => access_code) do 
+              = hidden_field_tag :surveyor_javascript_enabled, false              
+        
+              = values[:title]
+              &nbsp;
+              = label_tag :survey_version, 'version:'
+              = select_tag(:survey_version, options_for_select([["-- Current version --", ""]] + values[:survey_versions]))
+              &nbsp;
+              = submit_tag( t('surveyor.take_it') )
+      - else
+        %li
+          No surveys
+
+:javascript
+  $(document).ready(function() {
+    $("input#surveyor_javascript_enabled").val(true);
+  });

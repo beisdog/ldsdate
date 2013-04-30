@@ -1,0 +1,146 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  get_started_banner: "Get started with <a href='/'>%{site}</a> today!"
+  get_started_banner_subtitle: "Your dream partner is waiting for you ..."
+  hello: "Hello world"
+  what_i_look_for: "What I look for"
+  popular: Blog
+  sign_up_reason_1: We need you to register, so we can reserve a bed for you
+  sign_up_reason_2: You can also see other participants as registered user and contact them
+  age: "Age"
+  online: "Online"
+  basic_profile_info: Basic Info
+  height_cm: Height in cm
+  weight_kg: Weight in kg
+  body_type: Body Type
+  hair_color: Hair Color
+  eye_color: Eye Color
+  about_church: About Church
+  mission_location: Mission
+  served_mission: Served mission
+  mission_from_to: Mission from -  to (year)
+  children: Number of Kids
+  children_home: Kids at home
+  about_children: About children
+  church_attendance: Attends church
+  surveys: Surveys
+  _yes: "Yes"
+  _no: "No"
+  search_setting: "Search Settings"
+  males: "Males"
+  females: "Females"
+  only_online: "Only online"
+  no_search_results: "No search result"
+  eye_color_blue: "blue"
+  eye_color_green: "green"
+  eye_color_grey: "grey"
+  eye_color_brown: "brown"
+  eye_color_red: "red"
+  body_type_slender: "Slender"
+  body_type_average: "Average"
+  body_type_could_loose_a_few: "Could loose a few"
+  body_type_big_and_beautiful: "big and beautifull"
+  body_type_very_fit: "very fit"
+  body_type_muscular: "very muscular"
+  blonde: "blonde"
+  brown: "brown"
+  red: "red"
+  black: "black"
+  grey: "grey"
+  hair_color_changing: "changing"
+  church_attenance_not: "not"
+  church_attenance_occasionally: "occasionally"
+  church_attenance_regularly: "regularly"
+  profile_visible: Profile is visible to other members
+  profile_invisible: Profile is not visible to other members
+  when_checked_your_profile_will_be_visible_to_members_only: "When checked your profile will be visible to others"
+  when_unchecked_your_profile_will_only_be_not_shown_but_you_still_can_receive_matches: "When unchecked your profile will not be shown in the search but you can still look at other people and receive matches from "
+  served_mission_in: Served mission in
+  featured: Featured
+  de: Auf Deutsch umstellen
+  switch_lang_to: Switch to
+  years: Years
+  has_x_children_and_lives_with_x: "has %{number_of_children} children and lives with %{number_of_children_home}"
+  last_active_at: Last activity at
+  view_x_photos: "%{number_of_photos} pics"
+  new_date_ad: New Date Ad
+  publish_from: Publish From
+  publish_to: Publish to
+  when_to: When to
+  when_from: When from
+  visibility_settings: Visibility settings
+  country: Country
+  date_ads: Date Ads
+  action: Action
+  get_help_from_date_doctor: Get Help from the Date Doctor Team
+  show_to_males: Show to males
+  show_to_females: Show to females
+  only_people_in_this_age_range_can_see_the_ad: Only people in this age range can see this ad
+  only_people_in_this_country_can_see_the_ad: Only people in this country can see this ad, leave blank if you want it to be seen globally
+  when_checked_only_females_will_see_this_ad: When checked only females will see this ad
+  when_checked_only_males_will_see_this_ad: When checked only males will see this ad
+  when_checked_the_date_doctor_will_help_you: Check this if you want that the date doctor actively looks for a date for you
+  ward: Ward
+  stake: Stake
+  my_date_ads: My Date Ads
+  details: Details
+  locale: Locale
+  show_in_navigation_menu: Show in Navigation menu
+  navitem_title: Title in Navigation
+  navitem_index: Sort order in Navigation
+  firstname: First Name
+  lastname: Last Name
+  participants: Participants
+  register: Register
+  is_profile_pic: is the profile picture
+
+
+  surveyor_next_section: Next Section
+  surveyor_click_here_to_finish: Finish
+
+  surveyor:
+    take_these_surveys: "You may take these surveys"
+    take_it: "Take it"
+    completed_survey: "Completed survey"
+    unable_to_find_your_responses: "Unable to find your responses to the survey"
+    unable_to_update_survey: "Unable to update survey"
+    unable_to_find_that_survey: "Unable to find that survey"
+    survey_started_success: "Survey started successfully"
+    click_here_to_finish: "Click here to finish"
+    previous_section: "Previous section"
+    next_section: "Next section"
+    select_one: "Select one ..."
+    sections: "Sections"
+
+  #
+  fb_login: Facebook login
+  sb_last_seen_at: Last activity at
+  write_me: Write me!
+  interests: Interests
+  movies: Favorite Movies/TV shows
+  books: Favorite Books
+  tvshows: Favorite TV shows
+  music: Favorite Music
+  additional_info: Additional Info
+  navigation: Navigation
+  education: Education
+  occupation: Occupation
+  want_more_children: Wants children
+  maybe: Maybe
+  some_highschool: Some Highschool
+  highschool: Highschool
+  some_college: Some college
+  college: College
+  technical_school: Technical School
+  associate: Associate
+  bachelor: Bachelor
+  master: Master
+  doctorate: Doctorate
+  ethnicity: Ethnicity
+  caucasian_white: Caucasian, White
+  latino_hispanic: Latino or hispanic
+  zip: Zip
+  upload_photos: Upload Photos
+  fb_url: FB Url

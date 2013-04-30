@@ -1,0 +1,9 @@
+- @page_title = configatron.community_name + ' ' + :home.l
+- @meta = { :description => configatron.meta_description, :keywords => configatron.meta_keywords, :robots => configatron.robots_meta_list_content }
+
+-unless logged_in?
+  =render :partial => 'base/homepage_banner_message'
+  -#=render :partial => 'shared/login_sidebar'
+
+-if logged_in?
+  = render :partial => 'base/news'

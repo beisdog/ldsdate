@@ -1,0 +1,63 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ */
+ .form-horizontal .control-label {
+     text-align: left;
+     
+}
+.form-horizontal .controls {
+     margin-left: 80px;
+
+}
+
+/*h1,h2,h3{
+    border-bottom: 1px dashed silver;
+}
+*/
+.row{
+    margin-left: 0px; /* overwrite it was -30px before*/
+}
+
+.sidebar-nav-fixed {
+    position: fixed;
+    top: 60px;
+    width: 21%;
+
+}
+
+.uneditable-input{
+    width: auto;
+    border: 0px ;
+    color: #000000;
+}
+
+/* datepicker*/
+.ui-datepicker {
+  margin-left: 100px;
+  z-index: 1000;
+  font-size: small;
+}
+.ui-widget-header {
+    background: #000000;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.well-small {
+    background-color: whitesmoke;
+    border: 1px solid #E3E3E3;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05) inset;
+    margin-bottom: 20px;
+    min-height: 20px;
+    padding: 19px;
+}

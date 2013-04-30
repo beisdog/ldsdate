@@ -1,0 +1,66 @@
+-@page_title= :profile_photo_crop.l 
+  
+-widget do 
+  %h3=:preview.l
+  .style{:width=>'100px', :height => '100px',:overflow=> 'hidden', "margin-left" => '5px'}
+    =image_tag  @photo.photo.url(:original),:id => 'preview'
+
+  
+-widget do 
+  = link_to :profile_photo_change.l, upload_profile_photo_user_path(@user)
+    
+= image_tag @photo.photo.url(:original), :id => 'croppable'
+
+= form_for :photo, :url => crop_profile_photo_user_path(@user), :method => :put, :html => { :class => "form form-horizontal" } do |f|
+  - [:crop_x, :crop_y, :crop_w, :crop_h].each do |attribute|
+    %input{ :type=>"text", :name=>attribute, :id=>attribute, :value => ''}
+
+  %p
+    = submit_tag :update.l, :class => 'btn btn-primary'
+
+-content_for :end_javascript do
+  = stylesheet_link_tag 'cropper'
+  = javascript_include_tag "cropper"
+  :javascript
+    jQuery(function($) {
+
+      $('#croppable').Jcrop({
+        onChange: showPreview,
+        onSelect: showPreview,
+        onRelease: hidePreview,
+        aspectRatio: 1,
+        boxWidth: 450,
+        boxHeight: 400
+      });
+
+      var $preview = $('#preview');
+      // Our simple event handler, called from onChange and onSelect
+      // event handlers, as per the Jcrop invocation above
+      function showPreview(coords)
+      {
+        $('#crop_x').val(coords.x);
+        $('#crop_y').val(coords.y);
+        //$('#x2').val(coords.x2);
+        //$('#y2').val(coords.y2);
+        $('#crop_w').val(coords.w);
+        $('#crop_h').val(coords.h);
+        if (parseInt(coords.w) > 0)
+        {
+          var rx = 100 / coords.w;
+          var ry = 100 / coords.h;
+
+          $preview.css({
+            width: Math.round(rx * 500) + 'px',
+            height: Math.round(ry * 370) + 'px',
+            marginLeft: '-' + Math.round(rx * coords.x) + 'px',
+            marginTop: '-' + Math.round(ry * coords.y) + 'px'
+          }).show();
+        }
+      }
+
+      function hidePreview()
+      {
+        $preview.stop().fadeOut('fast');
+      }
+
+    });

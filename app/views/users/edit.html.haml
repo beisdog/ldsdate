@@ -1,0 +1,187 @@
+
+-widget do
+  #ul.nav.nav-list
+    %li=link_to :save_changes.l, '#', :class=> 'btn btn-success btn-large',:id => 'save_changes'
+    %li.nav-header=:you_are_editing_your_profile.l
+    %li= link_to :edit_your_account_settings_instead.l, edit_account_user_path(@user)
+    %li.nav-header=:photos.l
+    %li= link_to :upload_photos.l, user_photos_path(@user), :class=> 'btn btn-success btn-large'
+
+
+= render :partial => 'profile_user_info_sidebar', :locals => {:user => @user}
+
+-#-widget do
+-#  =:tips.l
+-#  -#= render :partial => 'shared/bio_help'
+-#  =:feel_free_to_embed_images_or_videos.l
+
+
+
+
+=bootstrap_form_for @user, :html => { :multipart =>true, :class => 'main_form'} do |f|
+  .row
+    .span9
+      %ul.nav.nav-tabs#myTab
+        %li.active
+          %a{:href=>"#about-me","data-toggle"=>"tab"}="About me"
+        %li
+          %a{:href=>"#basic","data-toggle"=>"tab"}="Basic info"
+        %li
+          %a{:href=>"#additional", "data-toggle"=>"tab"}="Additional Info"
+        %li
+          %a{:href=>"#tags", "data-toggle"=>"tab"}="Tags"
+        %li
+          %a{:href=>"#interests", "data-toggle"=>"tab"}="Interests"
+
+        %li
+          %a{:href=>"#church", "data-toggle" => "tab"}="Church"
+        %li
+          %a{:href=>"#children", "data-toggle" => "tab"}="About children"
+        %li
+          %a{:href=>"#privacy-settings", "data-toggle" => "tab"}="Privacy Settings"
+
+      .tab-content
+
+        .tab-pane.active#about-me
+          %h2=:about_me.l
+          = f.text_area :description, :class => "rich_text_editor", :style => "width:100%;height:100px;"
+          %h2=:what_i_look_for.l
+          = f.text_area :whatilookfor, :class => "rich_text_editor", :style => "width:100%; height:100px;"
+
+        .tab-pane#basic
+          .form-horizontal#basic-profile-info
+            = f.text_field :firstname, :style=>"width:200px", :label => :firstname.l
+            = f.text_field :lastname, :style=>"width:200px", :label => :lastname.l
+            = f.select(:gender, options_for_select([[:male.l,User::MALE],[:female.l,User::FEMALE]], selected = "#{@user.gender}"), { :label => :gender.l},{:style => 'width:90px',})
+            = f.text_field :birthday, :style=>"width:90px", :label => :birthday.l
+            -#= f.date_select :birthday, {:start_year => 1926, :end_year => Time.now.year - 1},{:class => 'input-mini',}
+            = f.text_field :zip, :style => 'width:90px',:label => :zip.l
+            = f.select(:country_id, options_from_collection_for_select(Country.find(:all), "id", "name", selected = "#{@user.country_id}"), {:include_blank => true, :label => :country.l},{:style => 'width:90px',})
+            = f.select(:education, options_for_select(User.education_array, selected = "#{@user.education}"), {:include_blank => true, :label => :body_type.l},{:style => 'width:90px',})
+            = f.text_field :occupation, :style => 'width:200px',:label => :occupation.l
+            = f.select(:ethnicity, options_for_select(User.ethnicity_array, selected = "#{@user.ethnicity}"), {:include_blank => true, :label => :ethnicity.l},{:style => 'width:90px',})
+
+
+        .tab-pane#additional
+          .form-horizontal
+            = f.text_field :height_cm, :style=>"width:40px", :label => :height_cm.l
+            = f.select(:body_type, options_for_select(User.body_type_array, selected = "#{@user.body_type}"), {:include_blank => true, :label => :body_type.l},{:style => 'width:90px',})
+            = f.select :eye_color,  options_for_select(User.eye_color_array , selected = "#{@user.eye_color}"), {:include_blank => true,:label => :eye_color.l},{:style => 'width:90px',}
+            = f.select :hair_color,  options_for_select(User.hair_color_array, selected = "#{@user.hair_color}"), {:include_blank => true,:label => :hair_color.l},{:style => 'width:90px',}
+        .tab-pane#church
+          .form-horizontal
+            = f.text_field :ward, :style=>"width:90px", :label => :ward.l
+            = f.text_field :stake, :style=>"width:90px", :label => :stake.l
+            = f.select :church_attendance,  options_for_select(User.church_attendance_array, selected = "#{@user.church_attendance}"), {:include_blank => true,:label => :hair_color.l},{:style => 'width:90px',}
+
+            =f.check_box :served_mission, :label => :served_mission.l
+
+            = f.text_field :mission_location, :style=>"width:200px", :label => :mission_location.l
+            .control-group
+              %label.control-label=:mission_from_to.l
+              .controls
+                = text_field :user, :mission_from, :style=>"width:30px", :length => 4
+                = "-"
+                = text_field :user, :mission_to, :style=>"width:30px", :length => 4
+
+        .tab-pane#children
+          .form-horizontal
+            = f.text_field :children, :style=>"width:30px",  :label => :children.l
+            = f.text_field :children_home, :style=>"width:30px", :label => :children_home.l
+            = f.select(:want_more_children, options_for_select(User.want_more_children_array, selected = "#{@user.want_more_children}"), { :label => :want_more_children.l},{:style => 'width:90px',})
+
+
+
+
+        .tab-pane#interests
+          %label
+            %i.icon-star.icon-white
+            =:interests.l
+          = text_field :user, :interest_list, {:autocomplete => "off"}
+          #interest_list_auto_complete.auto_complete
+          -content_for :end_javascript do
+            = tag_auto_complete_field 'user_interest_list', {:url => { :controller => "tags", :action => 'auto_complete_for_tag_name'}, :tokens => [','] }
+
+          %label
+            %i.icon-music.icon-white
+            =:music.l
+          = text_field :user, :music_list, {:autocomplete => "off"}
+          #music_list_auto_complete.auto_complete
+          -content_for :end_javascript do
+            = tag_auto_complete_field 'user_music_list', {:url => { :controller => "tags", :action => 'auto_complete_for_tag_name'}, :tokens => [','] }
+
+          %label
+            %i.icon-film.icon-white
+            =:movies.l
+          = text_field :user, :movie_list, {:autocomplete => "off"}
+          #movie_list_auto_complete.auto_complete
+          -content_for :end_javascript do
+            = tag_auto_complete_field 'user_movie_list', {:url => { :controller => "tags", :action => 'auto_complete_for_tag_name'}, :tokens => [','] }
+
+          %label
+            %i.icon-book.icon-white
+            =:books.l
+          = text_field :user, :book_list, {:autocomplete => "off"}
+          #book_list_auto_complete.auto_complete
+          -content_for :end_javascript do
+            = tag_auto_complete_field 'user_book_list', {:url => { :controller => "tags", :action => 'auto_complete_for_tag_name'}, :tokens => [','] }
+
+        .tab-pane#tags
+          #user_tags
+          = f.text_field :tag_list, {:autocomplete => "off"}
+          #tag_list_auto_complete.auto_complete
+          -content_for :end_javascript do
+            = tag_auto_complete_field 'user_tag_list', {:url => { :controller => "tags", :action => 'auto_complete_for_tag_name'}, :tokens => [','] }
+          %label.controls
+            %em
+              =:you_could_tag_yourself.l
+            - if @user.vendor?
+              =:custom_friendly_local.l
+            - else
+              = configatron.meta_keywords.split(",")[0..3].join(", ")
+            %br
+            =:tags_are_comma_separated_keywords_that_describe_you.l
+            %br
+            =:you_can_browse_all_content_and_users_on.l
+            = configatron.community_name
+            =:by_looking_at_the.l
+            = link_to :tags_page.l, tags_path
+
+        .tab-pane#privacy-settings
+          .form-horizontal
+            %fieldset
+            %label
+              = check_box :user, :profile_public
+              =:profile_visible.l
+            %br
+            %em
+              =:when_checked_your_profile_will_be_visible_to_members_only.l
+            %br
+            %em
+              =:when_unchecked_your_profile_will_only_be_not_shown_but_you_still_can_receive_matches.l
+              = "#{configatron.community_name}."
+
+
+    
+
+  
+
+-content_for :end_javascript do
+  :javascript
+    jQuery(function($) {
+      $("#user_birthday").datepicker(
+        {
+          changeMonth: true,
+          changeYear: true,
+          dateFormat: 'yy-mm-dd',
+          showButtonPanel: true
+        }
+      );
+      //add form submit to button on left
+      $("#save_changes").click(
+        function(event){event.preventDefault();$('.main_form').submit();}
+      );
+
+      
+    }
+    );

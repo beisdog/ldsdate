@@ -1,0 +1,8 @@
+
+-hero_unit do
+  %h1{:style => 'border-bottom: 0px'}
+    =:get_started_banner.l :site=>configatron.community_name
+  %h2{:style => 'border-bottom: 0px'}
+    =:get_started_banner_subtitle.l
+  %p.lead
+    =link_to :sign_up.l, signup_path

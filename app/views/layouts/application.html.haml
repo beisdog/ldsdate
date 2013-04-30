@@ -1,0 +1,59 @@
+!!!
+%html
+  %head
+    %link{:rel=>"shortcut icon", :href=>"#{home_url}favicon.ico"}
+    %meta{"http-equiv"=>"Content-Type", :content=>"text/html;charset=utf-8"}
+    =csrf_meta_tag
+
+    %title= page_title
+    -if @meta
+      -@meta.each do |key|
+        %meta{:name=>key[0], :content=>key[1]}
+
+    - if @rss_title && @rss_url
+      = auto_discovery_link_tag(:rss, @rss_url, {:title => @rss_title})
+      
+    = render :partial => "shared/scripts_and_styles"      
+    
+  %body
+    -unless configatron.facebook.key.blank?    
+      =render :partial => 'facebook/fb_require'    
+      
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container.clearfix
+          .row
+            = render :partial => "shared/header"
+     
+    .container-fluid
+      .row-fluid
+        = render :partial => "shared/messages" 
+        = render_hero_unit
+      .row-fluid
+        .span3
+          = render :partial => "shared/sidebar"
+
+        -if !(defined? @render_body) || @render_body == true
+          #div{:class => "span#{@r_widgets ? '6' : '9' } pull-middle" }
+            -#-if defined? @title
+              %h1=@title
+            -#-else
+            -#  %h1=container_title
+            -#= render :partial => "shared/messages"
+            = yield
+
+        -if @r_widgets
+          .span3.pull-right
+            .affix= render_r_widgets
+          
+                    
+      .row-fluid
+        .span12
+          = render :partial => 'shared/footer_links'
+
+
+    = render :partial => "shared/end_javascript"
+    = yield :end_javascript
+
+    -if current_user
+      -current_user.update_last_seen_at

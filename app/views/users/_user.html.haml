@@ -1,0 +1,38 @@
+.row.well
+  .span1
+    = link_to image_tag( user.avatar_photo_url(:medium) ), user_path(user)
+    = link_to :view_x_photos.l(:number_of_photos => user.photos.size ), user_photos_path(user) unless user.photos.size < 1
+  
+  .span2
+    %b= link_to "#{user.login}", user_path(user)
+    %b.badge.badge-success= "#{:online.l}!" if user.online?
+    %ul.nav
+      %li
+        = truncate "#{:age.l}: #{user.age}, #{user.gender_name}", :length => 40, :omission => '...'
+        
+      %li= truncate "#{user.ward}, #{user.stake}, #{user.country.name}", :length => 40, :omission => '...'
+      %li
+        %a
+          %i.icon-calendar
+          %abbr.published{:title=>"#{:sb_last_seen_at.l}: #{user.sb_last_seen_at}"}= " #{time_ago_in_words_or_date user.sb_last_seen_at}"
+  
+      -#-unless user.tags.empty?
+      -#  %li.tag
+      -#    %i.icon-tags.icon-white
+      -#    %abbr.published
+      -#      =raw(user.tags[0...6].compact.collect{|t| link_to( t.name, tag_url(t), :class => "tag badge badge-info") }.join(" "))
+      -unless user.interests.empty?
+        %li.tag
+          %i.icon-star.icon-white
+          %abbr.published
+            =raw(user.interests[0...6].compact.collect{|t| link_to( t.name, tag_url(t), :class => "tag badge badge-info") }.join(" "))
+
+  .span3
+    %p
+      - if @search && @search['description']
+        = truncate_words_with_highlight user.description, @search['description']
+      - else
+        = truncate_words user.description, 18, '...'
+    - if current_user && current_user.admin?
+      %p= button_to :assume_id.l, assume_user_path(user), :class => 'btn'
+    

@@ -1,0 +1,45 @@
+- user = @user
+-widget :class => 'hentry', :id => 'profile_details' do
+  %h3
+    = link_to @user.login, user_path(@user)
+    -if @user.featured_writer?    
+      %small=:featured_writer.l 
+    
+  
+  - if @is_current_user
+    - if @user.avatar
+      = @user.featured_writer ? "<div class='right_corner'><div class='featured_writer'></div></div>".html_safe : ''
+    - else 
+      = link_to :click_here_to_upload_one.l, user_photos_path(@user)
+    %br        
+  = link_to image_tag( @user.avatar_photo_url(:medium) ), user_photos_path(@user)
+   
+
+  %ul.nav.nav-list
+    %li
+      %a
+        %i.icon-calendar
+        %abbr.published{:title=>"#{@user.sb_last_seen_at}"}= " #{time_ago_in_words_or_date @user.sb_last_seen_at}"
+    %li
+      %i.icon-eye-open
+      = :view_count.l
+      %span.badge=@user.view_count
+    
+    - if @user.tags.any?
+      %li.tag
+        %i.icon-tags
+        %abbr.published
+          =raw(user.tags[0...6].compact.collect{|t| link_to( t.name, tag_url(t), :class => "tag badge badge-info") }.join(" "))
+    
+    
+    
+    
+- if current_user && current_user.admin?
+  -widget do 
+    %ul.nav.nav-list
+      %li.nav-header=:admin_controls.l
+      %li= link_to(:assume_user_id.l, assume_user_path(@user), {:method => :post} )
+      %li= link_to(:delete_this_user.l, user_path(@user), {:method => :delete, :confirm => :are_you_sure_you_want_to_permanently_delete_this_user.l} )    
+      %li= link_to("#{:toggle.l} #{:featured_writer.l}".html_safe, toggle_featured_user_path(@user), {:method => :put} )
+      %li= link_to("#{:assign_role.l}: #{@user.moderator? ? :member.l : :moderator.l}".html_safe, toggle_moderator_user_path(@user), {:method => :put} )
+

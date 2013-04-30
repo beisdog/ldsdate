@@ -1,0 +1,27 @@
+- first_album = nil
+-widget do
+  %ul.nav.nav-list
+    %li.nav-header="Facebook albums"
+    -@albums.each do |album|
+      -if first_album == nil
+        -first_album = album
+      %li
+        %a{:id=> album['id'], :onclick => "loadAlbum('#{album['id']}')"}
+          = "#{album['name']} [#{album['type']}]"
+        
+
+#album_content
+  = render :partial => "fb_album" , :locals => {:album => first_album }
+
+-content_for :end_javascript do
+  :javascript
+    function loadAlbum(albumId){
+      //alert(albumId);
+      $('#album_content').load('/photos/fb_album/' + albumId ,
+        function(responseTxt,statusTxt,xhr){
+          if(statusTxt=="error")
+            alert("Error: "+xhr.status+": "+xhr.responseTxt);
+        }
+      );
+      ;
+    }

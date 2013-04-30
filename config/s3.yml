@@ -1,0 +1,19 @@
+development:
+  bucket: ldsdate-dev
+  access_key_id: 'AKIAJZM624XY24I32MGA'
+  secret_access_key: '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'
+  use_persistent: true
+  
+
+
+test:
+  bucket: ldsdate-dev
+  access_key_id: 'AKIAJZM624XY24I32MGA'
+  secret_access_key: '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'
+  use_persistent: false
+
+production:
+  bucket: ldsdate-prd
+  access_key_id: 'AKIAJZM624XY24I32MGA'
+  secret_access_key: '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'
+  use_persistent: true

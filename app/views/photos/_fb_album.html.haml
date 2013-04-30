@@ -1,0 +1,26 @@
+-if @album != nil
+  - album = @album
+
+- photos = album['photos']
+
+-column = 1
+-column_max = 9
+
+%h1="Facebook Album:#{album['name']}"
+- if photos != nil
+  - data = photos['data']
+  - if data != nil
+    %table{:border => 1}
+      - data.each do |photo|
+        -if column % column_max == 0
+          - column = 1
+        -if column ==  1
+          %tr
+          
+        %td
+        
+          =image_tag photo['picture']
+          = "Column: modulo: #{column} % #{column_max} = #{column % column_max}"
+        -column = column + 1
+- else
+  #no_result="No pictures in album!"
