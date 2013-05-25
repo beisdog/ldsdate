@@ -54,4 +54,4 @@ gem 'bootstrap-datepicker-rails'
 gem 'thin'
 
 gem 'quiet_assets' #, :group => :development
-
+gem 'pry-rails'

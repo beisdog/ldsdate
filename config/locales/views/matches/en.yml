@@ -1,0 +1,7 @@
+en:
+  matches:
+    user:
+      want_to_know: 'Do you want to get to know this person?'
+      yes: Yes
+      no: No
+      maybe: Maybe

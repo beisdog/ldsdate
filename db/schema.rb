@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130320224106) do
+ActiveRecord::Schema.define(:version => 20130525142454) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -248,6 +248,13 @@ ActiveRecord::Schema.define(:version => 20130320224106) do
     t.string   "message"
     t.integer  "user_id"
     t.datetime "created_at"
+  end
+
+  create_table "matches", :force => true do |t|
+    t.integer "sender_id"
+    t.string  "sender_status"
+    t.integer "receiver_id"
+    t.string  "receiver_status"
   end
 
   create_table "message_threads", :force => true do |t|

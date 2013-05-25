@@ -114,6 +114,9 @@ class User < ActiveRecord::Base
              :order => "message.created_at DESC",
              :conditions => ["message.recipient_deleted = ?", false]
     has_many :message_threads_as_recipient, :class_name => "MessageThread", :foreign_key => "recipient_id"               
+
+    has_many :sent_matches, :class_name => 'Match', :foreign_key => 'sender_id'
+    has_many :received_matches, :class_name => 'Match', :foreign_key => 'receiver_id'
     
   #named scopes
   scope :recent, order('users.created_at DESC')
@@ -129,7 +132,7 @@ class User < ActiveRecord::Base
   scope :younger, lambda {|age| where("birthday >= ? ", "#{Time.now.utc.to_date.year - (age+1)}-01-01")}
   scope :ward, lambda {|ward| where("UPPER(ward) like UPPER(?)", "%#{ward}%")}
   scope :stake, lambda {|stake| where("UPPER(stake) like UPPER(?)", "%#{stake}%")}
-
+  scope :all_except_me, lambda { |user| where('id <> ?', user.id) }
 
   accepts_nested_attributes_for :avatar
   attr_accessible :avatar_id, :company_name, :country_id, :description, :email,
@@ -578,7 +581,22 @@ class User < ActiveRecord::Base
     end
     # END David
 
-  
+  def full_name
+    "#{firstname} #{lastname}"
+  end
+
+  def send_match(status_id, user_id)
+    receiver = User.find_by_id(user_id)
+    if i_sent_already(user_id)
+      i_sent_already(user_id).update_attributes(:sender_status => Match.status_name(status_id))
+    elsif user_already_sent_to_me(user_id)
+      user_already_sent_to_me(user_id).update_attributes(:receiver_status => Match.status_name(status_id))
+    else
+      Match.send_new(self, receiver, status_id)
+    end
+    receiver
+  end
+
   ## End Instance Methods
 
   protected
@@ -612,5 +630,16 @@ class User < ActiveRecord::Base
     def omniauthed?
       authorizing_from_omniauth || authorizations.any?      
     end
-  
+
+  private
+
+  def i_sent_already(user_id)
+    ids = sent_matches.pluck(:id)
+    Match.by_ids(ids).find_by_receiver_id(user_id)
+  end
+
+  def user_already_sent_to_me(user_id)
+    ids = received_matches.pluck(:id)
+    Match.by_ids(ids).find_by_sender_id(user_id)
+  end
 end
