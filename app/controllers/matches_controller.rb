@@ -11,6 +11,10 @@ class MatchesController < BaseController
     @sent_statuses = sent_statuses
   end
 
+  def sent
+    @matches = current_user.positive_matches
+  end
+
   private
 
   def sent_statuses

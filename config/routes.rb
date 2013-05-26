@@ -1,5 +1,9 @@
 Ldsdate::Application.routes.draw do
-  resources :matches
+  resources :matches do
+    collection do
+      get :sent
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -589,12 +589,15 @@ class User < ActiveRecord::Base
     receiver = User.find_by_id(user_id)
     if i_sent_already(user_id)
       i_sent_already(user_id).update_attributes(:sender_status => Match.status_name(status_id))
-    elsif user_already_sent_to_me(user_id)
-      user_already_sent_to_me(user_id).update_attributes(:receiver_status => Match.status_name(status_id))
+      update_inverse!(user_id, status_id)
     else
       Match.send_new(self, receiver, status_id)
     end
     receiver
+  end
+
+  def positive_matches
+    Match.by_ids(sent_matches.pluck(:id)).positive
   end
 
   ## End Instance Methods
@@ -638,8 +641,8 @@ class User < ActiveRecord::Base
     Match.by_ids(ids).find_by_receiver_id(user_id)
   end
 
-  def user_already_sent_to_me(user_id)
-    ids = received_matches.pluck(:id)
-    Match.by_ids(ids).find_by_sender_id(user_id)
+  def update_inverse!(user_id, status_id)
+    inverse = Match.find_inverse(i_sent_already(user_id)).first
+    inverse.update_attributes(:receiver_status => Match.status_name(status_id))
   end
 end

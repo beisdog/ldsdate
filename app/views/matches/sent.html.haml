@@ -1,0 +1,8 @@
+#match
+  .row-fluid
+    = link_to t('.find_match'), matches_path
+  .row-fluid
+    - if @matches.any?
+      = render :partial => 'match', :collection => @matches
+    - else
+      %p= t('.no_matches')

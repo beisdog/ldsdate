@@ -1,4 +1,6 @@
 #match
   .row-fluid
+    = link_to t('.sent_matches'), sent_matches_path
+  .row-fluid
     = render :partial => 'user', :collection => @users
 

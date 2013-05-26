@@ -1,0 +1,15 @@
+.row-fluid{:id => "match_#{match.id}"}
+  .span6
+    .row-fluid
+      .span12= user_avatar(match.sender)
+    .row-fluid
+      .span12= match.sender_full_name
+    .row-fluid
+      .span12= match.sender_status
+  .span6
+    .row-fluid
+      .span12= user_avatar(match.receiver)
+    .row-fluid
+      .span12= match.receiver_full_name
+    .row-fluid
+      .span12= match.receiver_status

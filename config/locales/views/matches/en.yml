@@ -1,5 +1,10 @@
 en:
   matches:
+    index:
+      sent_matches: 'Sent Matches'
+    sent:
+      find_match: 'Find the match'
+      no_matches: 'No matches yet'
     user:
       want_to_know: 'Do you want to get to know this person?'
       yes: Yes
