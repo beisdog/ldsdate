@@ -103,6 +103,7 @@ GEM
     dynamic_form (1.1.4)
     erubis (2.7.0)
     eventmachine (1.0.0)
+    excon (0.22.1)
     execjs (1.4.0)
       multi_json (~> 1.0)
     faraday (0.7.6)
@@ -118,6 +119,14 @@ GEM
     friendly_id (3.3.3.0)
       babosa (~> 0.3.0)
     haml (3.1.8)
+    heroku (2.39.3)
+      heroku-api (~> 0.3.7)
+      launchy (>= 0.3.2)
+      netrc (~> 0.7.7)
+      rest-client (~> 1.6.1)
+      rubyzip
+    heroku-api (0.3.11)
+      excon (~> 0.22.1)
     hike (1.2.1)
     hpricot (0.8.6)
     htmlentities (4.3.1)
@@ -141,6 +150,8 @@ GEM
     koala (1.4.0)
       faraday (~> 0.7.0)
       multi_json (~> 1.0)
+    launchy (2.1.0)
+      addressable (~> 2.2.6)
     log4r (1.1.10)
     macaddr (1.6.1)
       systemu (~> 2.5.0)
@@ -160,6 +171,7 @@ GEM
     multipart-post (1.2.0)
     mustache (0.99.4)
     net-ldap (0.2.2)
+    netrc (0.7.7)
     nokogiri (1.5.6)
     oa-basic (0.3.2)
       oa-core (= 0.3.2)
@@ -260,6 +272,7 @@ GEM
     ruby-openid-apps-discovery (1.2.0)
       ruby-openid (>= 2.1.7)
     rubyntlm (0.1.1)
+    rubyzip (0.9.9)
     sanitize (2.0.3)
       nokogiri (>= 1.4.4, < 1.6)
     sass (3.2.6)
@@ -312,10 +325,11 @@ DEPENDENCIES
   cocaine (= 0.3.2)
   coffee-rails (~> 3.2.1)
   community_engine!
+  heroku
   jquery-rails
   koala
   multi_json (~> 1.0.0)
-  pg
+  pg (= 0.14.1)
   pry-rails
   quiet_assets
   rails (= 3.2.11)

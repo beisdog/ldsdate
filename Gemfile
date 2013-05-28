@@ -5,7 +5,7 @@ gem 'rails', '3.2.11'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'pg'
+gem 'pg', '0.14.1'
 
 
 # Gems used only for assets and not required
@@ -52,6 +52,6 @@ gem 'surveyor'
 gem 'bootstrap-datepicker-rails'
 
 gem 'thin'
-
+gem 'heroku'
 gem 'quiet_assets' #, :group => :development
 gem 'pry-rails'
