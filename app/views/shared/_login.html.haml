@@ -1,0 +1,23 @@
+.modal-header
+  %h3= t('.title')
+.modal-body
+  .find-matches
+    %p= t('.find_matches')
+  .fb-button-container-centered
+    = link_to 'javascript: void(false)', :onclick => 'fb_login(event)', class: 'fb-button' do
+      %span.fb-button-left
+      %span.fb-button-center
+        = t('.facebook_login').html_safe
+      %span.fb-button-right
+  .or-separator.shift
+    %span.text= t('.or')
+    %hr
+  .row-fluid
+    .span12
+      = form_tag sessions_path, :class => 'form form-inline' do
+        .row-fluid
+          .span12= text_field_tag 'email', nil, :placeholder => :email.l, :style => 'width:90px'
+        .row-fluid
+          .span12= password_field_tag 'password', nil, :placeholder => :password.l, :style => 'width:90px'
+        .row-fluid
+          .span12= submit_tag :log_in.l, :class => 'btn btn-info'

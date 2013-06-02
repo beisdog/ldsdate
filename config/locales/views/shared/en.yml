@@ -1,0 +1,7 @@
+en:
+  shared:
+    login:
+      title: 'Log In to LDS Date'
+      find_matches: 'Get started with LDS Date (Europe) today! Your dream partner is waiting for you ...'
+      facebook_login: '<strong>Log in</strong> with <strong>Facebook</strong>'
+      or: 'or'

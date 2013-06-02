@@ -10,6 +10,7 @@
  *
  *= require_self
  *= require matches
+ *= require login
  */
  .form-horizontal .control-label {
      text-align: left;
@@ -61,4 +62,45 @@
     margin-bottom: 20px;
     min-height: 20px;
     padding: 19px;
+}
+
+.modal-backdrop {
+  background-color: white;
+}
+
+.modal-header {
+  background-image: linear-gradient(bottom, rgb(229,229,229) 11%, rgb(246,246,246) 52%);
+  background-image: -o-linear-gradient(bottom, rgb(229,229,229) 11%, rgb(246,246,246) 52%);
+  background-image: -moz-linear-gradient(bottom, rgb(229,229,229) 11%, rgb(246,246,246) 52%);
+  background-image: -webkit-linear-gradient(bottom, rgb(229,229,229) 11%, rgb(246,246,246) 52%);
+  background-image: -ms-linear-gradient(bottom, rgb(229,229,229) 11%, rgb(246,246,246) 52%);
+
+  background-image: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0.11, rgb(229,229,229)),
+    color-stop(0.52, rgb(246,246,246))
+  );
+  border-bottom: 1px solid #BBBBBB;
+  border-radius: 5px 5px 0 0;
+  padding: 9px 15px;
+  text-shadow: 0 1px 1px white;
+}
+
+.modal-header h3 {
+  font-size: 18px;
+  line-height: 27px;
+}
+
+.modal-footer {
+  border-radius: 0 0 6px 6px;
+  border-top: 1px solid #D5D5D5;
+  box-shadow: 0 1px 0 #FFFFFF inset, 0 0 0 #000000;
+  margin-bottom: 0;
+  padding: 14px 15px 15px;
+}
+
+.clear-both {
+  clear: both;
 }

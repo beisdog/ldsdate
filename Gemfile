@@ -50,7 +50,9 @@ gem 'koala'
 
 gem 'surveyor'
 gem 'bootstrap-datepicker-rails'
-
+gem "therubyracer"
+gem "less-rails"
+gem "twitter-bootstrap-rails"
 gem 'thin'
 
 gem 'quiet_assets' #, :group => :development

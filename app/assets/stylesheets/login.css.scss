@@ -1,0 +1,100 @@
+.login-popup {
+  width: 356px;
+  border: 3px solid rgb(121, 121, 121);
+  margin-left: -168px;
+  background-image: linear-gradient(bottom, rgb(245,245,245) 34%, rgb(255,255,255) 67%);
+  background-image: -o-linear-gradient(bottom, rgb(245,245,245) 34%, rgb(255,255,255) 67%);
+  background-image: -moz-linear-gradient(bottom, rgb(245,245,245) 34%, rgb(255,255,255) 67%);
+  background-image: -webkit-linear-gradient(bottom, rgb(245,245,245) 34%, rgb(255,255,255) 67%);
+  background-image: -ms-linear-gradient(bottom, rgb(245,245,245) 34%, rgb(255,255,255) 67%);
+
+  background-image: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0.34, rgb(245,245,245)),
+    color-stop(0.67, rgb(255,255,255))
+  );
+}
+
+.find-matches {
+  padding: 10px 20px 0;
+  p {
+    font-size: 15px;
+  }
+}
+
+.fb-button {
+  left: auto;
+  text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.6);
+}
+
+.fb-button:hover {
+  box-shadow: 0 0 5px #888;
+}
+
+.fb-button, .fb-button-left, .fb-button-center, .fb-button-right {
+  background: url('fb-button-sprite.png');
+  float: left;
+  height: 40px;
+  display: block;
+}
+
+.fb-button-left {
+  width: 40px;
+}
+
+.fb-button-center {
+  font-size: 15px;
+  line-height: 39px;
+  text-align: center;
+  width: 235px;
+  background-color: #6385BA;
+  background-position: left -40px;
+  background-repeat: repeat-x;
+  color: #FFFFFF;
+  padding: 0 5px 0 8px;
+}
+
+.fb-button-right {
+  background-position: 100% -80px;
+  width: 6px;
+}
+
+.fb-button-container-centered {
+  padding-top: 5px;
+  text-align: center;
+
+  .fb-button {
+    display: inline-block;
+    float: none;
+    margin-bottom: 5px;
+  }
+}
+
+.or-separator {
+  color: #959595;
+  font-size: 14px;
+  font-weight: bold;
+  height: 34px;
+  margin: 0;
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+
+  .text {
+    background-color: #F7F7F7;
+    line-height: 36px;
+    padding: 0 10px;
+  }
+}
+
+.or-separator hr {
+  margin: -19px auto 10px auto;
+  width: 200px;
+}
+
+.shift {
+  font-style: normal;
+  line-height: normal;
+}

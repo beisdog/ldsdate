@@ -26,13 +26,5 @@
 -else
   %li= link_to(:sign_up.l, signup_path)
   %li
-    = form_tag sessions_path, :class => 'form form-inline' do
-      = text_field_tag 'email', nil, :placeholder => :email.l, :style => 'width:90px'
-      =password_field_tag 'password', nil, :placeholder => :password.l, :style => 'width:90px'
-      = submit_tag :log_in.l, :class => 'btn btn-info'
-      %a{:value => :log_in.l, :class => "btn",   :onclick => 'fb_login(event)'}
-        = image_tag("facebook-logo.png")
-        = :log_in.l
-        
-
-  
+    .row-fluid
+      .span12= link_to :log_in.l, new_session_path, :class => 'btn btn-info', remote: true
