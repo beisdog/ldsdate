@@ -21,3 +21,10 @@ configatron.photo.paperclip_options.styles.large.geometry = '465>'
 #configatron.facebook.key = '371180202996665'
 #configatron.facebook.secret = '	4008a552192018b918525e22d84fe136'
 #configatron.facebook.callback_url = "http://localhost:3000/auth/facebook"
+
+
+
+# for localhost - when in Facebook.com present parameter App Domains:ldsdate.dev and in /etc/hosts add "127.0.0.1       ldsdate.dev"
+configatron.facebook.key = '128679700667376'
+configatron.facebook.secret = '80bb0673c8ff741a2a05513592573758'
+configatron.facebook.callback_url = "http://ldsdate.dev/auth/facebook"
