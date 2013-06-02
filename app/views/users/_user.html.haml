@@ -1,4 +1,4 @@
-.row.well
+.row.well{:id => "user_#{user.id}"}
   .span1
     = link_to image_tag( user.avatar_photo_url(:medium) ), user_path(user)
     = link_to :view_x_photos.l(:number_of_photos => user.photos.size ), user_photos_path(user) unless user.photos.size < 1
@@ -35,4 +35,5 @@
         = truncate_words user.description, 18, '...'
     - if current_user && current_user.admin?
       %p= button_to :assume_id.l, assume_user_path(user), :class => 'btn'
-    
+  .span6
+    = render :partial => '/matches/match_block', :locals => { :user => user }

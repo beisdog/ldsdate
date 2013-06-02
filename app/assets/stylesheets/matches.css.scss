@@ -1,23 +1,21 @@
-#match {
-  .row-fluid {
-    margin-bottom: 20px;
-  }
-  .green {
-    color: green;
-  }
-  .red {
-    color: red;
-  }
-  .selected_yes {
-    border: 1px solid green;
-    border-radius: 5px;
-  }
-  .selected_no {
-    border: 1px solid red;
-    border-radius: 5px;
-  }
-  .selected_maybe {
-    border: 1px solid #049CDB;
-    border-radius: 5px;
-  }
+.row-fluid {
+  margin-bottom: 20px;
+}
+.green {
+  color: green;
+}
+.red {
+  color: red;
+}
+.selected_yes {
+  border: 1px solid green;
+  border-radius: 5px;
+}
+.selected_no {
+  border: 1px solid red;
+  border-radius: 5px;
+}
+.selected_maybe {
+  border: 1px solid #049CDB;
+  border-radius: 5px;
 }

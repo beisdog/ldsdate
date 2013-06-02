@@ -86,6 +86,13 @@ class BaseController < ApplicationController
     before_filter p, options
   end
   
+  def my_sent_statuses
+    @sent_statuses = {}
+    current_user.sent_matches.map do |match|
+      @sent_statuses[match.receiver_id] = match.sender_status
+    end
+    @sent_statuses
+  end
   
   private
     def admin_required

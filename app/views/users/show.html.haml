@@ -9,6 +9,7 @@
 -widget :id => 'friends' do
   %ul.nav.nav-list
     %li.nav-header=:my_friends.l
+    %li.nav-header
     %li= link_to "(#{@friend_count})", accepted_user_friendships_path(@user) if @friend_count > 5
     %li= link_to "#{:invite_a_friend.l :site => configatron.community_name}", invite_user_path(@user) if @is_current_user
     %li= link_to "#{:view_all_my_friend_requests.l} (#{@pending_friendships_count})", pending_user_friendships_path(@user) if @is_current_user
@@ -17,11 +18,16 @@
     -if @accepted_friendships.size > 4
       %li
         =icon_link_to 'icon-plus-sign', :see_all.l, accepted_user_friendships_path(@user)
-   
+
 - if @photos.empty? and @recent_posts.empty?
   -widget do 
     %ul.nav.nav-list
       %li.nav-header= :small_profile.l :user => @user.login
+
+- if current_user != @user
+  - widget do
+    .row-fluid{:id => "user_#{user.id}"}
+      = render :partial => 'matches/match_block', :locals => { :user => @user }
 
 - if @is_current_user and @user.vendor? and @user.description.nil?
   .alert.alert-info
@@ -30,7 +36,6 @@
     Pro! You should
     = link_to :update_your_profile.l, edit_user_path(@user)
     \! Add your contact info and Web site.
-
 - if !@is_current_user
   .row
     .span9

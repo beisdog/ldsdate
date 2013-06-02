@@ -5,8 +5,9 @@ en:
     sent:
       find_match: 'Find the match'
       no_matches: 'No matches yet'
-    user:
+    match_block:
       want_to_know: 'Do you want to get to know this person?'
+    user:
       yes: Yes
       no: No
       maybe: Maybe

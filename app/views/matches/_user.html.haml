@@ -5,8 +5,4 @@
     .row-fluid
       .span10= user.full_name
       .span2
-        .row-fluid
-          .span12= t('.want_to_know')
-        .row-fluid
-          #match_links.span12
-            = render :partial => 'match_links', :locals => { :user => user }
+        = render :partial => 'match_block', locals: { :user => user }

@@ -9,7 +9,7 @@ development:
   database: ldsdate_development
   pool: 5
   username: postgres
-  password: root
+  password: password
   host: localhost
   port: 5432
 
@@ -19,7 +19,7 @@ test:
   database: ldsdate_test
   pool: 5
   username: postgres
-  password: root
+  password: password
   port: 5432
 
 production:

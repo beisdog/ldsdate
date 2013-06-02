@@ -23,6 +23,7 @@ class UsersController < BaseController
                                                 :crop_profile_photo, :upload_profile_photo]
   before_filter :admin_required, :only => [:assume, :destroy, :featured, :toggle_featured, :toggle_moderator]
   before_filter :admin_or_current_user_required, :only => [:statistics]  
+  before_filter :my_sent_statuses, :only => [:index, :show]
 
   def activate
     redirect_to signup_path and return if params[:id].blank?
