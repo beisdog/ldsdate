@@ -4,11 +4,10 @@
       event.preventDefault();
       FB.login(function(response){
         if(response.authResponse){
-          alert("authResponse:" + response.authResponse.accessToken);
+          //alert("authResponse:" + response.authResponse.accessToken);
           window.location ="/auth/facebook?accessToken="+response.authResponse.accessToken+"&fb_user_id="+response.authResponse.userID;
         } else {
-          alert("Facebook login failed " + response);
-          //console.log(response);
+          //alert("Facebook login failed " + response);
         }
       },{scope: 'email,user_photos,user_about_me,user_birthday'})
     }

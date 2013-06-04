@@ -44,7 +44,10 @@ class SessionsController < BaseController
       @user = User.find_by_fb_id(fb_user["id"]) || User.find_by_email(fb_user["email"])
 
       if(@user  == nil)
+logger.info "fb_user -> #{fb_user}"
         birthday = Date.strptime(fb_user["birthday"], '%d/%m/%Y') unless fb_user["birthday"].blank?
+logger.info "fb_user birthday -> #{birthday}"
+
         @user = User.new({
           :fb_id => fb_user["id"],
           :firstname => fb_user["first_name"],
