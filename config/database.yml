@@ -8,8 +8,8 @@ development:
   encoding: unicode
   database: ldsdate_development
   pool: 5
-  username: postgres
-  password: root
+  username: davidbeisert
+  password: $andra
   host: localhost
   port: 5432
 
