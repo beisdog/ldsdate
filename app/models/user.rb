@@ -643,6 +643,6 @@ class User < ActiveRecord::Base
 
   def update_inverse!(user_id, status_id)
     inverse = Match.find_inverse(i_sent_already(user_id)).first
-    inverse.update_attributes(:receiver_status => Match.status_name(status_id))
+    inverse.update_attributes(:receiver_status => Match.status_name(status_id)) if inverse
   end
 end
