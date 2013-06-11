@@ -2,7 +2,7 @@
 class SessionsController < BaseController
 
   skip_before_filter :store_location, :only => [:new, :create]
-
+ respond_to :js, only: [:new]
   def index
     redirect_to :action => "new"
   end  
@@ -10,6 +10,7 @@ class SessionsController < BaseController
   def new
     redirect_to user_path(current_user) and return if current_user
     @user_session = UserSession.new
+    render :partial => "/sessions/new"
   end
 
   def fb_login
@@ -18,13 +19,13 @@ class SessionsController < BaseController
     fb_user_id = params[:fb_user_id]
 
     
-    flash[:notice] = "accessToken #{accessToken}"
+#    flash[:notice] = "accessToken #{accessToken}"
     if(accessToken == nil || fb_user_id == nil)
 
       return redirect_to  :action => :new
       
     else
-      flash[:notice] = "authinfo: #{accessToken}"
+#      flash[:notice] = "authinfo: #{accessToken}"
       begin
         @graph = Koala::Facebook::API.new(accessToken)
         # on windows this is necessary
@@ -44,9 +45,7 @@ class SessionsController < BaseController
       @user = User.find_by_fb_id(fb_user["id"]) || User.find_by_email(fb_user["email"])
 
       if(@user  == nil)
-logger.info "fb_user -> #{fb_user}"
-        birthday = Date.strptime(fb_user["birthday"], '%d/%m/%Y') unless fb_user["birthday"].blank?
-logger.info "fb_user birthday -> #{birthday}"
+        birthday = Date.strptime(fb_user["birthday"], '%m/%d/%Y') unless fb_user["birthday"].blank?
 
         @user = User.new({
           :fb_id => fb_user["id"],
@@ -158,19 +157,19 @@ logger.info "fb_user birthday -> #{birthday}"
   end
 
   def create
-    
-    
     @user_session = UserSession.new(:login => params[:email], :password => params[:password], :remember_me => params[:remember_me])
 
     if @user_session.save
-
       current_user = @user_session.record #if current_user has been called before this, it will ne nil, so we have to make to reset it
-      
-      flash[:notice] = :thanks_youre_now_logged_in.l
-      redirect_back_or_default(dashboard_user_path(current_user))
+
+	respond_to do |format|
+#	  format.html { redirect_to dashboard_user_path(current_user) }
+	  format.js { render :partial => "/sessions/made" }	  
+	end
     else
-      flash[:notice] = :uh_oh_we_couldnt_log_you_in_with_the_username_and_password_you_entered_try_again.l
-      render :action => :new
+      respond_to do |format|
+        format.js { render :partial => "/sessions/error", :locals => {:errors => @user_session.errors.full_messages} }
+      end
     end
   end
 

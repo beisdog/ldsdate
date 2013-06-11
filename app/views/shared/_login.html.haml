@@ -1,8 +1,10 @@
-= form_tag sessions_path, :class => 'login-form' do
+= form_tag sessions_path, :class => 'login-form', :remote => true do
 
   .modal-header
     %h3= t('.title')
+
   .modal-body
+    #notice.alert-login
     .find-matches
       %p= t('.find_matches')
     .fb-button-container-centered
@@ -31,4 +33,4 @@
             %a{'href'=>'#'} Forgot password?
           
   .modal-footer
-    = submit_tag :log_in.l, :class => 'btn btn-info pull-right'
+    = submit_tag :log_in.l, :class => 'btn btn-info pull-right', :id => "loginpopup"
