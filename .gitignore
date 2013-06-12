@@ -14,5 +14,5 @@
 /log/*.log
 /tmp
 # Ignore configs
-/config/database.yml
+config/database.yml
 .rvmrc
