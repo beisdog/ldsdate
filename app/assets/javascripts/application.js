@@ -20,4 +20,5 @@
 //= require twitter/bootstrap/bootstrap-button
 //= require twitter/bootstrap/bootstrap-collapse
 //= require twitter/bootstrap/bootstrap-tab
+//= require twitter/bootstrap/bootstrap-dropdown
 //= require login
