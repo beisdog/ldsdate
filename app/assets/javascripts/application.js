@@ -22,3 +22,4 @@
 //= require twitter/bootstrap/bootstrap-tab
 //= require twitter/bootstrap/bootstrap-dropdown
 //= require login
+//= require registration

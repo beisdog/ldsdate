@@ -40,8 +40,7 @@ class User < ActiveRecord::Base
   has_enumerated :role      
   tracks_unlinked_activities [:logged_in, :invited_friends, :updated_profile, :joined_the_site]
   #David
-  acts_as_taggable_on :tags, :interests, :books, :movies, :tvshows, :musics
-
+  acts_as_taggable_on :tags, :books, :movies, :sports, :dinings, :hobbies, :vacations
   
   #callbacks  
   before_create :make_activation_code
@@ -117,7 +116,12 @@ class User < ActiveRecord::Base
 
     has_many :sent_matches, :class_name => 'Match', :foreign_key => 'sender_id'
     has_many :received_matches, :class_name => 'Match', :foreign_key => 'receiver_id'
-    
+
+    #registration
+    has_one :additional_info
+    has_one :preference
+    has_one :essay
+
   #named scopes
   scope :recent, order('users.created_at DESC')
   scope :featured, where(:featured_writer => true)
@@ -154,6 +158,7 @@ class User < ActiveRecord::Base
     :education, :occupation, :want_more_children, :ethnicity
 
   attr_accessor :authorizing_from_omniauth
+  attr_writer :current_step
 
   ## Class Methods
 

@@ -1,0 +1,3 @@
+= f.fields_for :avatar, @avatar do |avatar_form| 
+  %label=:choose_a_photo_for_your_profile.l 
+  = avatar_form.file_field :photo, :size => '15'

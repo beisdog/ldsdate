@@ -1,0 +1,8 @@
+= bootstrap_fields_for :interests do |i|
+  = i.text_area :books, :data => { :autocomplete_source => autocomplete_tags_path(tags_type: :books) }, :size => '30x5', :label => t('.favorite_books')
+  = i.text_area :movies, :data => { :autocomplete_source => autocomplete_tags_path(tags_type: :movies) }, :size => '30x5', :label => t('.favorite_movies')
+  = i.text_area :sport_watch, :data => { :autocomplete_source => autocomplete_tags_path(tags_type: :sports) }, :size => '30x5', :label => t('.sport_watch')
+  = i.text_area :sport_play, :data => { :autocomplete_source => autocomplete_tags_path(tags_type: :sports) }, :size => '30x5', :label => t('.sport_play')
+  = i.text_area :dinings, :data => { :autocomplete_source => autocomplete_tags_path(tags_type: :dinings) }, :size => '30x5', :label => t('.dinings')
+  = i.text_area :hobbies, :data => { :autocomplete_source => autocomplete_tags_path(tags_type: :hobbies) }, :size => '30x5', :label => t('.hobbies')
+  = i.text_area :vacations, :data => { :autocomplete_source => autocomplete_tags_path(tags_type: :vacations) }, :size => '30x5', :label => t('.vacations')

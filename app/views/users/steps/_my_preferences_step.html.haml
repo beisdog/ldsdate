@@ -1,0 +1,68 @@
+= bootstrap_fields_for :preferences do |p|
+  .control-group
+    = label_tag t('.visible_to_others'), nil, :class => 'control-label'
+    .controls
+      = p.radio_button :visible_to_others, 'yes'
+      = p.radio_button :visible_to_others, 'no'
+  = p.text_field :look_young_age, :style => "width: 90px", :label => t('.look_young_age')
+  = p.text_field :look_old_age, :style => "width: 90px", :label => t('.look_old_age')
+  = p.text_field :hide_for_younger, :style => "width: 90px", :label => t('.hide_for_younger')
+  = p.text_field :hide_for_older, :style => "width: 90px", :label => t('.hide_for_older')
+  %div
+    = label_tag t('.height')
+  = p.text_field :height_from, :style => "width: 90px", :label => t('.from')
+  = p.text_field :height_to, :style => "width: 90px", :label => t('.to')
+  %div
+    = label_tag t('.smokes')
+  - Smoke.all.each do |smoke|
+    .control-group
+      = label_tag t(".#{smoke.name}"), nil, :class => 'control-label'
+      .controls
+        = check_box_tag 'smokes_ids[]', smoke.name
+  %div
+    = label_tag t('.drinks')
+  - Drink.all.each do |drink|
+    .control-group
+      = label_tag t(".#{drink.name}"), nil, :class => 'control-label'
+      .controls
+        = check_box_tag 'drinks_ids[]', drink.name
+  %div
+    = label_tag t('.body_type')
+  - BodyType.all.each do |bt|
+    .control-group
+      = label_tag t(".#{bt.name}"), nil, :class => 'control-label'
+      .controls
+        = check_box_tag 'body_type_ids[]', bt.name
+  = p.select(:body_type_importance, options_for_select(Constants::IMPORTANCE), { :label => t('.importance') }, { :style => 'width: 90px' })
+  %div
+    = label_tag t('.hair_color')
+  - HairColor.all.each do |hc|
+    .control-group
+      = label_tag t(".#{hc.name}"), nil, :class => 'control-label'
+      .controls
+        = check_box_tag 'hair_color_ids[]', hc.name
+  = p.select(:hair_color_importance, options_for_select(Constants::IMPORTANCE), { :label => t('.importance') }, { :style => 'width: 90px' })
+  %div
+    = label_tag t('.ethnicity')
+  - Ethnicity.all.each do |ethnicity|
+    .control-group
+      = label_tag t(".#{ethnicity.name}"), nil, :class => 'control-label'
+      .controls
+        = check_box_tag 'ethnicity_ids[]', ethnicity.name
+  = p.select(:ethnicity_importance, options_for_select(Constants::IMPORTANCE), { :label => t('.importance') }, { :style => 'width: 90px' })
+  .control-group
+    = label_tag t('.partner_with_children'), nil, :class => 'control-label'
+    .controls
+      = p.radio_button :partner_with_children, 'yes'
+      = p.radio_button :partner_with_children, 'no'
+  = p.text_field :look_for, :style => "width: 90px", :label => t('.look_for')
+  = p.text_field :income, :style => "width: 90px", :label => t('.income')
+  = p.select(:income_importance, options_for_select(Constants::IMPORTANCE), { :label => t('.importance') }, { :style => 'width: 90px' })
+  = p.text_field :countries, :style => "width: 90px", :label => t('.countries')
+  = p.select(:countries, options_from_collection_for_select(Country.find(:all), "id", "name", selected = "#{@user.country_id}"), { :include_blank => true, :label => :country.l }, { :style => 'width:90px' })
+  = p.text_field :max_distance, :style => "width: 90px", :label => t('.max_distance')
+  .control-group
+    = label_tag t('.moving'), nil, :class => 'control-label'
+    .controls
+      = p.radio_button :moving, 'yes'
+      = p.radio_button :moving, 'no'

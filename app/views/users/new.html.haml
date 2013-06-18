@@ -17,30 +17,30 @@
   %p= link_to :already_have_an_account.l, "/login"
 
 
-= bootstrap_form_for @user, :html => {:class => 'form form-horizontal'} do |f|
-  = f.text_field :login, :label => :username.l, :help_inline => :required_your_username_must_not_contain_numerals_spaces_or_special_characters.l
-  = f.text_field :email, :label => :e_mail_address.l, :help_inline => :required_we_will_send_a_confirmation_e_mail_to_the_address_you_enter.l
-  = f.text_field :birthday, :style=>"width:90px", :label => :birthday.l, :help_inline => :required_you_must_be_at_least_years_old_to_sign_up.l_with_args(:min_age => configatron.min_age)
-  = f.text_field :firstname, :style=>"width:90px", :label => :firstname.l
-  = f.text_field :lastname, :style=>"width:90px", :label => :lastname.l 
-  = f.select(:gender, options_for_select([[:male.l,User::MALE],[:female.l,User::FEMALE]], selected = "#{@user.gender}"), { :label => :gender.l},{:style => 'width:90px',})
-  = f.text_field :zip, :style => 'width:90px',:label => :zippostal_code.l
-  = f.select(:country_id, options_from_collection_for_select(Country.find(:all), "id", "name", selected = "#{@user.country_id}"), {:include_blank => true, :label => :country.l},{:style => 'width:90px',})
-  = f.text_field :ward, :style=>"width:90px", :label => :ward.l
-  = f.text_field :stake, :style=>"width:90px", :label => :stake.l
-  = f.fields_for :avatar, @avatar do |avatar_form| 
-    %label=:choose_a_photo_for_your_profile.l 
-    = avatar_form.file_field :photo, :size => '15'
-
+= bootstrap_form_for @user, :html => { :class => 'form form-horizontal' } do |f|
+  %ul.nav.nav-tabs
+    %li.active= link_to t('.basic'), '#basic', 'data-toggle' => 'tab'
+    %li= link_to t('.additional_info'), '#additional_info', 'data-toggle' => 'tab'
+    %li= link_to t('.upload_photo'), '#upload_photo', 'data-toggle' => 'tab'
+    %li= link_to t('.hobbies_interest'), '#hobbies_interest', 'data-toggle' => 'tab'
+    %li= link_to t('.my_preferences'), '#my_preferences', 'data-toggle' => 'tab'
+    %li= link_to t('.essays_about_me'), '#essays_about_me', 'data-toggle' => 'tab'
+  .tab-content
+    #basic.tab-pane.active
+      = render :partial => "users/steps/basic_step", :locals => { :f => f }
+    #additional_info.tab-pane
+      = render :partial => "users/steps/additional_info_step", :locals => { :f => f }
+    #upload_photo.tab-pane
+      = render :partial => "users/steps/upload_photo_step", :locals => { :f => f }
+    #hobbies_interest.tab-pane
+      = render :partial => "users/steps/hobbies_interest_step", :locals => { :f => f }
+    #my_preferences.tab-pane
+      = render :partial => "users/steps/my_preferences_step", :locals => { :f => f }
+    #essays_about_me.tab-pane
+      = render :partial => "users/steps/essays_about_me_step", :locals => { :f => f }
 
   -if configatron.require_captcha_on_signup
     .pull-right= recaptcha_tags
-
-  - if @user.fb_id == nil
-    = f.password_field :password
-    = f.password_field :password_confirmation, :help_inline => :re_type_your_password_to_confirm.l
-  -else
-    = f.text_field :fb_url, :label => :fb_url.l
 
   = hidden_field_tag :inviter_id, params[:inviter_id]
   = hidden_field_tag :inviter_code, params[:inviter_code]

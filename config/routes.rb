@@ -5,6 +5,12 @@ Ldsdate::Application.routes.draw do
     end
   end
 
+  resources :tags do
+    collection do
+      get :autocomplete
+    end
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

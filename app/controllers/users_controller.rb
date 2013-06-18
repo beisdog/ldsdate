@@ -127,42 +127,50 @@ class UsersController < BaseController
     update_view_count(@user) unless current_user && current_user.eql?(@user)
   end
   
+  #def new
+    #@user         = User.new( {:birthday => Date.parse((Time.now - 25.years).to_s) }.merge(params[:user] || {}) )
+    #@inviter_id   = params[:id]
+    #@inviter_code = params[:code]
+  #end
+
+  #def create
+    #@user       = User.new(params[:user])
+    #@user.role  = Role[:member]
+
+    #if (!configatron.require_captcha_on_signup || verify_recaptcha(@user)) && @user.save
+      #create_friendship_with_inviter(@user, params)
+      #flash[:notice] = :email_signup_thanks.l_with_args(:email => @user.email)
+      
+      #if(Ldsdate::Application.config.signup_complete_activate )
+        #@user.activate
+        ##flash[:notice] = "User was activated! You can log in right away"
+        ##login user
+        #@user_session = UserSession.new(@user, true)
+        #if @user_session.save
+          #current_user = @user_session.record #if current_user has been called before this, it will ne nil, so we have to make to reset it
+          #flash[:notice] = :thanks_youre_now_logged_in.l
+          #session[:redirect_to] = nil
+          #return redirect_to dashboard_user_path(current_user)
+        #else
+            #flash[:notice] = :uh_oh_we_couldnt_log_you_in_with_the_username_and_password_you_entered_try_again.l
+            #render :controller => :session , :action => :new
+        #end
+        ##return redirect_to login_path
+
+      #else
+        #redirect_to signup_completed_user_path(@user)
+      #end
+    #else
+      #render :action => 'new'
+    #end
+  #end
+
   def new
-    @user         = User.new( {:birthday => Date.parse((Time.now - 25.years).to_s) }.merge(params[:user] || {}) )
-    @inviter_id   = params[:id]
-    @inviter_code = params[:code]
+    @user = User.new
   end
 
   def create
-    @user       = User.new(params[:user])
-    @user.role  = Role[:member]
 
-    if (!configatron.require_captcha_on_signup || verify_recaptcha(@user)) && @user.save
-      create_friendship_with_inviter(@user, params)
-      flash[:notice] = :email_signup_thanks.l_with_args(:email => @user.email)
-      
-      if(Ldsdate::Application.config.signup_complete_activate )
-        @user.activate
-        #flash[:notice] = "User was activated! You can log in right away"
-        #login user
-        @user_session = UserSession.new(@user, true)
-        if @user_session.save
-          current_user = @user_session.record #if current_user has been called before this, it will ne nil, so we have to make to reset it
-          flash[:notice] = :thanks_youre_now_logged_in.l
-          session[:redirect_to] = nil
-          return redirect_to dashboard_user_path(current_user)
-        else
-            flash[:notice] = :uh_oh_we_couldnt_log_you_in_with_the_username_and_password_you_entered_try_again.l
-            render :controller => :session , :action => :new
-        end
-        #return redirect_to login_path
-
-      else
-        redirect_to signup_completed_user_path(@user)
-      end
-    else
-      render :action => 'new'
-    end
   end
     
   def edit 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130525142454) do
+ActiveRecord::Schema.define(:version => 20130617191350) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -23,6 +23,27 @@ ActiveRecord::Schema.define(:version => 20130525142454) do
 
   add_index "activities", ["created_at"], :name => "index_activities_on_created_at"
   add_index "activities", ["user_id"], :name => "index_activities_on_user_id"
+
+  create_table "additional_infos", :force => true do |t|
+    t.string  "want_kids"
+    t.integer "body_type_id"
+    t.integer "user_id"
+    t.string  "bodytype"
+    t.string  "height"
+    t.boolean "show_weight"
+    t.text    "looks"
+    t.integer "hair_color_id"
+    t.integer "eye_color_id"
+    t.integer "attractiveness_id"
+    t.text    "handicap"
+    t.boolean "show_handicap"
+    t.string  "ward"
+    t.string  "stake"
+    t.integer "relationship_status_id"
+    t.integer "education_id"
+    t.text    "occupation"
+    t.text    "university"
+  end
 
   create_table "ads", :force => true do |t|
     t.string   "name"
@@ -87,6 +108,10 @@ ActiveRecord::Schema.define(:version => 20130525142454) do
     t.datetime "asset_updated_at"
   end
 
+  create_table "attractivenesses", :force => true do |t|
+    t.string "name"
+  end
+
   create_table "authorizations", :force => true do |t|
     t.integer  "user_id"
     t.string   "provider"
@@ -99,6 +124,10 @@ ActiveRecord::Schema.define(:version => 20130525142454) do
     t.string   "access_token_secret"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
+  end
+
+  create_table "body_types", :force => true do |t|
+    t.string "name"
   end
 
   create_table "categories", :force => true do |t|
@@ -177,6 +206,34 @@ ActiveRecord::Schema.define(:version => 20130525142454) do
     t.datetime "updated_at",     :null => false
   end
 
+  create_table "drinks", :force => true do |t|
+    t.string "name"
+  end
+
+  create_table "educations", :force => true do |t|
+    t.string "name"
+  end
+
+  create_table "essays", :force => true do |t|
+    t.text    "about_me"
+    t.text    "looking_for"
+    t.text    "contact_my_if"
+    t.text    "influential_person"
+    t.text    "notice_about"
+    t.text    "wish_to_notice"
+    t.text    "five_things"
+    t.text    "leisure_time"
+    t.text    "passionate_about"
+    t.text    "thankfull_for"
+    t.text    "friends_say"
+    t.text    "friday_night"
+    t.integer "user_id"
+  end
+
+  create_table "ethnicities", :force => true do |t|
+    t.string "name"
+  end
+
   create_table "events", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -188,6 +245,10 @@ ActiveRecord::Schema.define(:version => 20130525142454) do
     t.integer  "metro_area_id"
     t.string   "location"
     t.boolean  "allow_rsvp",    :default => true
+  end
+
+  create_table "eyes_colors", :force => true do |t|
+    t.string "name"
   end
 
   create_table "favorites", :force => true do |t|
@@ -227,6 +288,10 @@ ActiveRecord::Schema.define(:version => 20130525142454) do
   add_index "friendships", ["friendship_status_id"], :name => "index_friendships_on_friendship_status_id"
   add_index "friendships", ["user_id"], :name => "index_friendships_on_user_id"
 
+  create_table "hair_colors", :force => true do |t|
+    t.string "name"
+  end
+
   create_table "homepage_features", :force => true do |t|
     t.datetime "created_at"
     t.string   "url"
@@ -248,6 +313,10 @@ ActiveRecord::Schema.define(:version => 20130525142454) do
     t.string   "message"
     t.integer  "user_id"
     t.datetime "created_at"
+  end
+
+  create_table "look_fors", :force => true do |t|
+    t.string "name"
   end
 
   create_table "matches", :force => true do |t|
@@ -364,6 +433,32 @@ ActiveRecord::Schema.define(:version => 20130525142454) do
   add_index "posts", ["published_at"], :name => "index_posts_on_published_at"
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
 
+  create_table "preferences", :force => true do |t|
+    t.boolean "visible_to_others"
+    t.integer "look_young_age"
+    t.integer "look_old_age"
+    t.integer "hide_for_younger"
+    t.integer "hide_for_older"
+    t.integer "height_from"
+    t.integer "height_to"
+    t.string  "smokes"
+    t.string  "drinks"
+    t.string  "body_type"
+    t.integer "body_type_importance"
+    t.string  "hair_color"
+    t.integer "hair_color_importance"
+    t.string  "ethnicity"
+    t.integer "ethnicity_importance"
+    t.boolean "partner_with_children"
+    t.string  "look_for"
+    t.string  "income"
+    t.integer "income_importance"
+    t.string  "countries"
+    t.integer "max_distance"
+    t.string  "moving"
+    t.integer "user_id"
+  end
+
   create_table "question_groups", :force => true do |t|
     t.text     "text"
     t.text     "help_text"
@@ -405,6 +500,10 @@ ActiveRecord::Schema.define(:version => 20130525142454) do
   end
 
   add_index "questions", ["api_id"], :name => "uq_questions_api_id", :unique => true
+
+  create_table "relationship_statuses", :force => true do |t|
+    t.string "name"
+  end
 
   create_table "response_sets", :force => true do |t|
     t.integer  "user_id"
@@ -490,6 +589,10 @@ ActiveRecord::Schema.define(:version => 20130525142454) do
 
   add_index "slugs", ["name", "sluggable_type", "sequence", "scope"], :name => "index_slugs_on_n_s_s_and_s", :unique => true
   add_index "slugs", ["sluggable_id"], :name => "index_slugs_on_sluggable_id"
+
+  create_table "smokes", :force => true do |t|
+    t.string "name"
+  end
 
   create_table "states", :force => true do |t|
     t.string "name"

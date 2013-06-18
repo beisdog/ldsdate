@@ -1,0 +1,18 @@
+= bootstrap_fields_for :additional_info do |ai|
+  = ai.select(:want_kids, options_for_select(%w(yes maybe no)), { :include_blank => true, :label => t('.i_want_kids') }, { :style => 'width: 90px' })
+  = ai.select(:body_type_id, options_from_collection_for_select(BodyType.all, "id", "name"), { :include_blank => true, :label => t('.body_type') }, { :style => 'width:90px' })
+  = ai.text_field :height, :style => "width: 90px", :label => t('.height')
+  = ai.check_box :show_weight, :style => "width: 90px", :label => t('.show_weight')
+  = ai.text_area :looks, :size => '30x5', :label => t('.looks')
+  = ai.select(:hair_color_id, options_from_collection_for_select(HairColor.all, "id", "name"), { :include_blank => true, :label => t('.hair_color') }, { :style => 'width: 90px' })
+  = ai.select(:eyes_color_id, options_from_collection_for_select(EyesColor.all, "id", "name"), { :include_blank => true, :label => t('.eyes_color') }, { :style => 'width: 90px' })
+  = ai.select(:attractiveness_id, options_from_collection_for_select(Attractiveness.all, "id", "name"), { :include_blank => true, :label => t('.attractiveness') }, { :style => 'width: 90px' })
+  = ai.text_area :handicap, :size => '30x5', :label => t('.handicap')
+  = ai.check_box :show_handicap, :style => "width: 90px", :label => t('.show_handicap')
+  = ai.text_field :ward, :style => "width: 90px", :label => t('.ward')
+  = ai.text_field :stake, :style => "width: 90px", :label => t('.stake')
+  = ai.select(:relationship_status_id, options_from_collection_for_select(RelationshipStatus.all, "id", "name"), { :include_blank => true, :label => t('.relationship_status') }, { :style => 'width: 90px' })
+  = ai.select(:education_id, options_from_collection_for_select(Education.all, "id", "name"), { :include_blank => true, :label => t('.education') }, { :style => 'width: 90px' })
+  = ai.text_area :occupation, :size => '30x5', :label => t('.occupation')
+  = ai.text_area :university, :size => '30x5', :label => t('.university')
+
